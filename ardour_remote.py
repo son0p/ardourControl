@@ -4,7 +4,7 @@
 
 import liblo, sys
 
-# send all messages to port 1234 on the local machine
+# send all messages to port 3819 where ardour recieve OSC by default
 try:
     target = liblo.Address(3819)
 except liblo.AddressError, err:
@@ -15,6 +15,8 @@ except liblo.AddressError, err:
 def listen():
     c = raw_input('--> ')
     return c
+# Put your keys and dstitation here
+# for destination options go https://community.ardour.org/osc_control
 while True:
     c = listen() 
     if c == "p":
@@ -33,8 +35,6 @@ while True:
         ls = liblo.send(target, "/ardour/routes/list")
         print(ls)
     elif c == "test":
-        # Hard coded works fine?
-#        liblo.send(target, "/ardour/routes/gaindB if 1 -5")
         liblo.send(target, "/ardour/routes/gaindB", ('d', 1), ('f', 
                  -5.0))
 
